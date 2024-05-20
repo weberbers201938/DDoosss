@@ -1,3 +1,8 @@
-const dos = require('./bin')
-const configs = __dirname+'/config.json';
-dos(configs.urls, configs.request, configs.req_time, configs.options)
+const dos = require('./bin');
+const fs = require('fs');
+const path = require('path');
+
+const configPath = path.join(__dirname, 'config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+
+dos(config.urls, config.request, config.req_time, config.userAgents);
