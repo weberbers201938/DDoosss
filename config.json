@@ -1,5 +1,5 @@
 {
-  urls: '',
-  request: '',
-  req_time: ''
+  "urls": "URL HERE!",
+  "request": "NUMBER OF REQUEST PER REQUEST TIME!",
+  "req_time": "REQUEST TIME"
 }
