@@ -1,0 +1,16 @@
+{
+  "name": "dos-attack",
+  "version": "1.0.0",
+  "description": "Simple DoS attack tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.2",
+    "fs": "^0.0.1",
+    "path": "^0.12.7"
+  }
+}
