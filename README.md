@@ -4,14 +4,14 @@ This script sends a large number of HTTP requests to a specified URL using multi
 
 ## Requirements
 
-- Python 3.x
-- `aiohttp` library
+- Nodejs 20.x
+- `request` library
 
 ## Installation
 
 1. Clone this repository or download the script files.
 2. Navigate to the project directory.
-3. Install the required Python packages using `pip`:
+3. Install the required Nodejs packages using `npm`:
 
 ```sh
-pip install aiohttp
+npm install request
