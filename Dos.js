@@ -1,3 +1,3 @@
 const dos = require('./bin')
-
-dos('http://localhost:3000', 150, 500)
+const configs = __dirname+'/config.json';
+dos(configs.urls, configs.request, configs.req_time)
