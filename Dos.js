@@ -19,7 +19,7 @@ console.log('\x1b[31m%s\x1b[0m', asciiArt); // Red color for horror effect
 console.log('\x1b[31m%s\x1b[0m', 'Version 1.0');
 console.log('\x1b[31m%s\x1b[0m', 'Credits: Berwin');
 console.log('\x1b[31m%s\x1b[0m', 'Facebook: https://fb.com/learnfromber');
-console.log('\x1b[31m%s\x1b[0m', 'Enter at your own risk...');
+console.log('\x1b[31m%s\x1b[0m', 'Use at your own risk...');
 
 const rl = readline.createInterface({
   input: process.stdin,
