@@ -1,5 +1,5 @@
 function start(message) {
-  if (message) logger(message, "[ Starting ]");
+  if (message) console.log(message, "[ Starting ]");
 
   const child = spawn("node", ["--trace-warnings", "--async-stack-traces", "Dos.js"], {
     cwd: __dirname,
@@ -14,7 +14,7 @@ function start(message) {
     }
   });
 
-  child.on("error", error => logger("An error occurred: " + JSON.stringify(error), "[ Starting ]"));
+  child.on("error", error => console.log("An error occurred: " + JSON.stringify(error), "[ Starting ]"));
 }
 
 start();
