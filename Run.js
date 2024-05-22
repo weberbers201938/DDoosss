@@ -1,4 +1,4 @@
-function startBot(message) {
+function start(message) {
   if (message) logger(message, "[ Starting ]");
 
   const child = spawn("node", ["--trace-warnings", "--async-stack-traces", "Dos.js"], {
@@ -10,7 +10,7 @@ function startBot(message) {
   child.on("close", codeExit => {
     if (codeExit !== 0 || (global.countRestart && global.countRestart < 5)) {
       global.countRestart = (global.countRestart || 0) + 1;
-      startBot("Restarting system...");
+      start("Restarting system...");
     }
   });
 
