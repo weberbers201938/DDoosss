@@ -1,10 +1,18 @@
 const req = require('request');
 const fs = require('fs');
 
-const proxies = fs
-  .readFileSync(__dirname, 'proxies.txt', 'utf-8')
-  .split('\n')
-  .filter(proxy => proxy.trim() !== '');
+function readProxies() {
+  try {
+    const proxiesContent = fs.readFileSync('proxies.txt', 'utf-8');
+    return proxiesContent
+      .split('\n')
+      .map(line => line.trim())
+      .filter(proxy => proxy !== ''); // Remove empty lines (if any)
+  } catch (err) {
+    console.error("Error reading proxies.txt:", err);
+    return []; 
+  }
+}
 
 const userAgents = [
   'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3) Gecko/20090913 Firefox/3.5.3',
@@ -21,6 +29,7 @@ const userAgents = [
   'Opera/9.80 (Windows NT 5.2; U; ru) Presto/2.5.22 Version/10.51'
 ];
 
+const proxies = readProxies(); 
 let currentProxyIndex = 0;
 let currentUserAgentIndex = 0;
 
