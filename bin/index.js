@@ -3,14 +3,14 @@ const fs = require('fs');
 
 function readProxies() {
   try {
-    const proxiesContent = fs.readFileSync(__dirname,'proxies.txt', 'utf-8');
+    const proxiesContent = fs.readFileSync(__dirname+'/proxies.txt', 'utf-8');
     return proxiesContent
       .split('\n')
       .map(line => line.trim())
-      .filter(proxy => proxy !== ''); // Remove empty lines (if any)
+      .filter(proxy => proxy !== ''); 
   } catch (err) {
     console.error("Error reading proxies.txt:", err);
-    return []; 
+    return [];
   }
 }
 
