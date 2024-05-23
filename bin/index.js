@@ -3,7 +3,7 @@ const fs = require('fs');
 
 function readProxies() {
   try {
-    const proxiesContent = fs.readFileSync('proxies.txt', 'utf-8');
+    const proxiesContent = fs.readFileSync(__dirname,'proxies.txt', 'utf-8');
     return proxiesContent
       .split('\n')
       .map(line => line.trim())
